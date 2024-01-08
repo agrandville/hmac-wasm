@@ -33,12 +33,12 @@ pub fn to_hex_string(bytes: Vec<u8>) -> String {
 #[wasm_bindgen]
 pub fn sha256(secret: String, data: String) -> String {  
 
-  let mut output = format!("data(\"{}\")={}",data,to_hex_string(data.to_owned().into_bytes()));
-  web_sys::console::log_1(&output.into());
-  
-  output = format!("secret(\"{}\")={}",secret,to_hex_string(secret.to_owned().into_bytes()));
+  let mut output = format!("secret(\"{}\")={}",secret,to_hex_string(secret.to_owned().into_bytes()));
   web_sys::console::log_1(&output.into());
 
+  output = format!("data(\"{}\")={}",data,to_hex_string(data.to_owned().into_bytes()));
+  web_sys::console::log_1(&output.into());
+  
   type HmacSha256 = Hmac<Sha256>; 
   let mut mac = HmacSha256::new_from_slice(secret.as_bytes())
     .expect("HMAC can take key of any size");
